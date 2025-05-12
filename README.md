@@ -7,7 +7,7 @@
 
 ## 🔗 Links
 
-- **GitHub Repo:** https://github.com/YourUsername/tech-quiz-test-suite  
+- **GitHub Repo:** [https://github.com/YourUsername/tech-quiz-test-suite  ](https://github.com/PHTMGatt/19-Testing-Tech-Quiz-Test-Suite)
 - **Walkthrough Video:** [https://youtu.be/your-video-link ](https://youtu.be/FcIQsPgJqd8) 
 
 ---
