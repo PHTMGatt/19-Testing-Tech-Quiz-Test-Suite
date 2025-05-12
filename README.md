@@ -8,7 +8,7 @@
 ## 🔗 Links
 
 - **GitHub Repo:** https://github.com/YourUsername/tech-quiz-test-suite  
-- **Walkthrough Video:** https://youtu.be/your-video-link  
+- **Walkthrough Video:** [https://youtu.be/your-video-link ](https://youtu.be/FcIQsPgJqd8) 
 
 ---
 
