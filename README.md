@@ -1,5 +1,7 @@
 # 📋 Tech Quiz Test Suite
 
+![Tech Quiz portfolio artwork](https://raw.githubusercontent.com/PHTMGatt/12-React-Portfolio/a2c43d8301679dbda14ad06dc225d61e5515e431/src/assets/project-images/Tech%20Quiz.png)
+
 > A polished Cypress test suite for the MERN‑stack Tech Quiz application—complete with both component and end‑to‑end coverage.  
 > Ensures reliability by verifying quiz start, question flow, scoring, and restart functionality.
 
@@ -8,7 +10,7 @@
 ## 🔗 Links
 
 - **GitHub Repo:** https://github.com/PHTMGatt/19-Testing-Tech-Quiz-Test-Suite
-- **Walkthrough Video:** https://youtu.be/FcIQsPgJqd8 
+- **Walkthrough Video:** https://youtu.be/FcIQsPgJqd8
 
 ---
 
@@ -29,7 +31,7 @@ The Tech Quiz Test Suite adds comprehensive automated testing to an existing MER
 - ✅ Question Navigation (next/previous)  
 - ✅ Final Score Display  
 - ✅ Quiz Restart Flow  
-- ✅ Error Handling & Edge Cases  
+- ✅ Error Handling & Edge Cases
 
 ---
 
@@ -38,7 +40,7 @@ The Tech Quiz Test Suite adds comprehensive automated testing to an existing MER
 - **Framework:** React (with Jest for snapshots)  
 - **Server:** Node.js, Express, MongoDB  
 - **Testing:** Cypress (Component & E2E)  
-- **CI:** npm scripts  
+- **CI:** npm scripts
 
 ---
 
