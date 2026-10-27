@@ -1,5 +1,9 @@
 # 📋 Tech Quiz Test Suite
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/PHTMGatt/12-React-Portfolio/main/src/assets/photos/Tech%20Quiz.png" width="900" alt="Tech Quiz Test Suite project artwork">
+</p>
+
 > A polished Cypress test suite for the MERN‑stack Tech Quiz application—complete with both component and end‑to‑end coverage.  
 > Ensures reliability by verifying quiz start, question flow, scoring, and restart functionality.
 
