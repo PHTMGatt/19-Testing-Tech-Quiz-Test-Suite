@@ -19,8 +19,11 @@ jobs:
           node-version: 22
           cache: npm
           cache-dependency-path: |
+            package-lock.json
             server/package-lock.json
             client/package-lock.json
+      - name: Root tooling (client type-check reads the root vite config)
+        run: npm ci --ignore-scripts
       - name: Server build
         run: |
           cd server
