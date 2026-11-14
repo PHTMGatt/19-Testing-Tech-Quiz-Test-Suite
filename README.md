@@ -41,7 +41,7 @@ npm run seed         # loads the questions into MongoDB
 npm run start:dev    # API and Vite dev server together
 ```
 
-The production-style start is `npm start`, which builds the client and serves it from the API on port 3001.
+`npm start` builds the client, then builds and starts the API on port 3001.
 
 ## Test it
 
@@ -51,7 +51,9 @@ npx cypress run --component      # component tests, headless
 npx cypress run --e2e            # e2e tests, headless
 ```
 
-The e2e tests expect the app to be running at http://localhost:3001 with the database seeded (use `npm start` in another terminal first). The component tests need no server.
+The component tests need no server. The e2e tests visit http://localhost:3001 with the database seeded, so they need the API to serve the built client there.
+
+**Known issue:** the e2e run does not work yet. `server/src/server.ts` only serves `client/dist` when `NODE_ENV=production`, that branch uses `__dirname` (undefined in an ES module), and the catch-all route in `server/src/routes/index.ts` answers asset requests with `index.html` because it runs before any static middleware. Fixing those three is the next step.
 
 ## What I learned / built
 
