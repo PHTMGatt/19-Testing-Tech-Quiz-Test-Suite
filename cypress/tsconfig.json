@@ -1,0 +1,10 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "target": "es2020",
+    "lib": ["es2020", "dom"],
+    "jsx": "react-jsx",
+    "types": ["cypress", "node"]
+  },
+  "include": ["**/*.ts", "**/*.js", "**/*.jsx"]
+}
