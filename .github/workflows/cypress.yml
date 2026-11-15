@@ -1,0 +1,96 @@
+# cypress
+# Runs the repo's own Cypress suites on GitHub's runner (the Cypress binary downloads here, not on a dev PC).
+# component: mounts the Quiz component with the API stubbed, no server or database.
+# e2e: real MongoDB service container, seeded, real Express server serving the built client on :3001.
+# Read-only: no secrets, no deploys. The database is a throwaway container that only lives for the job.
+name: cypress
+
+on:
+  pull_request:
+  push:
+    branches: [claude-forge]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cypress-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  component:
+    name: component tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            server/package-lock.json
+            client/package-lock.json
+      - name: Install
+        run: |
+          npm ci --no-fund --ignore-scripts
+          (cd client && npm ci --no-fund)
+      - name: Install Cypress binary
+        run: npx cypress install
+      - name: Cypress component tests
+        run: npx cypress run --component --config video=false
+
+  e2e:
+    name: e2e tests (mongo + server)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    services:
+      mongo:
+        image: mongo:7
+        ports:
+          - 27017:27017
+        options: >-
+          --health-cmd "mongosh --quiet --eval 'db.runCommand({ping:1})'"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 12
+    env:
+      MONGODB_URI: mongodb://localhost:27017/techquiz
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            server/package-lock.json
+            client/package-lock.json
+      - name: Install
+        run: |
+          npm ci --no-fund --ignore-scripts
+          (cd server && npm ci --no-fund)
+          (cd client && npm ci --no-fund)
+      - name: Install Cypress binary
+        run: npx cypress install
+      - name: Build client and server
+        run: |
+          (cd client && npm run build)
+          (cd server && npm run build)
+      - name: Seed the database
+        run: npm run seed
+      - name: Start the server (serves the built client and the API on :3001)
+        run: |
+          cd server
+          nohup node dist/server.js > "$RUNNER_TEMP/server.log" 2>&1 &
+          cd ..
+          npx wait-on --timeout 60000 http-get://localhost:3001
+          curl -fsS -o /dev/null -w "GET / -> %{http_code} %{content_type}\n" http://localhost:3001/
+          asset=$(ls client/dist/assets/*.js | head -1)
+          curl -fsS -o /dev/null -w "GET /assets/$(basename "$asset") -> %{http_code} %{content_type} %{size_download}B\n" "http://localhost:3001/assets/$(basename "$asset")"
+      - name: Cypress e2e tests
+        run: npx cypress run --e2e --browser electron --config video=false
+      - name: Server log
+        if: always()
+        run: cat "$RUNNER_TEMP/server.log" || true

@@ -10,7 +10,7 @@ import apiRoutes from './api/index.js';
 
 router.use('/api', apiRoutes);
 
-// serve up react front-end in production
+// serve up the react front-end (index.html catch-all); server.ts registers the static files before this router
 router.use((_req: Request, res: Response) => {
   res.sendFile(path.join(__dirname, '../../../client/dist/index.html'));
 });
