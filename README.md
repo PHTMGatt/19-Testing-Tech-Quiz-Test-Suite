@@ -10,6 +10,10 @@ Cypress component and end-to-end tests for a MERN tech quiz app (React, Express,
 
 Walkthrough video: https://youtu.be/FcIQsPgJqd8
 
+## Status
+
+Coursework project. Checked 2026-11-26 on Windows with Node 26. The server and client builds pass. The Cypress tests and the seed script were **not** run (no MongoDB on the test machine).
+
 ## What it does
 
 - **Quiz app:** a React and TypeScript front end, an Express API (`GET /api/questions/random`) and MongoDB for the question set. Start the quiz, answer 10 questions, see the score, take a new quiz.
@@ -21,9 +25,9 @@ Walkthrough video: https://youtu.be/FcIQsPgJqd8
 
 | Area | Tools |
 |---|---|
-| Front end | React 18, TypeScript, Vite |
-| Back end | Node.js, Express 4, Mongoose, MongoDB |
-| Testing | Cypress 13 (component and e2e) |
+| Front end | React 19, TypeScript, Vite |
+| Back end | Node.js, Express 5, Mongoose 9, MongoDB |
+| Testing | Cypress 16 (component and e2e) |
 
 ## Run it
 
